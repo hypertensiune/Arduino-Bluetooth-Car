@@ -24,32 +24,6 @@ void setDirectionBackward(int motorA, int motorB){
   digitalWrite(motorB, LOW);
 }
 
-void turnRight(){
-  if(!isMoving){
-    setDirectionForward(leftMotor1, leftMotor2);
-    setDirectionBackward(rightMotor1, rightMotor2);
-    analogWrite(rightMotorSpeed, SPEED);
-    analogWrite(leftMotorSpeed, SPEED);
-  }
-  else{
-    analogWrite(rightMotorSpeed, SPEED - 50);
-    analogWrite(leftMotorSpeed, SPEED + 30);
-  }
-}
-
-void turnLeft(){
-  if(!isMoving){
-    setDirectionForward(rightMotor1, rightMotor2);
-    setDirectionBackward(leftMotor1, leftMotor2);
-    analogWrite(rightMotorSpeed, SPEED);
-    analogWrite(leftMotorSpeed, SPEED);
-  }
-  else{
-    analogWrite(rightMotorSpeed, SPEED + 30);
-    analogWrite(leftMotorSpeed, SPEED - 50);
-  }
-}
-
 void setup() {
   pinMode(rightMotor1, OUTPUT);
   pinMode(rightMotor2, OUTPUT);
@@ -94,7 +68,8 @@ void loop() {
 
   // right
   if(command == 2){
-    turnRight();
+    analogWrite(rightMotorSpeed, SPEED - 50);
+    analogWrite(leftMotorSpeed, SPEED + 30);
   }
   if(command == -2){
     analogWrite(rightMotorSpeed, 0);
@@ -103,7 +78,8 @@ void loop() {
 
   // left
   if(command == 4){
-    turnLeft();
+    analogWrite(rightMotorSpeed, SPEED + 30);
+    analogWrite(leftMotorSpeed, SPEED - 50);
   }
   if(command == -4){
     analogWrite(rightMotorSpeed, 0);
